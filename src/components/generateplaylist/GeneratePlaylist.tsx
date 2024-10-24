@@ -3,27 +3,27 @@ import { jwtDecode } from "jwt-decode";
 import PrompInterface from "../../interfaces/PromptInterface";
 
 function GeneratePlaylist() {
-  const [newPrompt, setNewPrompt] = useState<PrompInterface>({ prompt: "" });
-  const [playlistLink, setPlaylistLink] = useState<string | null>(null);
+    const [newPrompt, setNewPrompt] = useState<PrompInterface>({ prompt: "" });
+    const [playlistLink, setPlaylistLink] = useState<string | null>(null);
 
-  const token = localStorage.getItem("token") || "";
-  const decodedToken = jwtDecode<{ sub: string }>(token);
-  const loggedInUser = decodedToken.sub;
+    const token = localStorage.getItem("token") || "";
+    const decodedToken = jwtDecode(token);
+    const loggedInUser = decodedToken.sub;
 
-  const sendPrompt = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    const sendPrompt = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    fetch(`http://localhost:8080/aichat/${loggedInUser}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        prompt: newPrompt.prompt
-      }),
+        fetch(`http://localhost:8080/aichat/${loggedInUser}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            prompt: newPrompt.prompt
+        }),
     })
-      .then((response) => {
+    .then((response) => {
         if (!response.ok) {
           throw new Error("Kunde inte skapa spellista");
         }
