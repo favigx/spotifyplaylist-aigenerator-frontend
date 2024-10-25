@@ -34,12 +34,6 @@ function Navigation({ setPage, isLoggedIn, setIsLoggedIn, currentPage }: Props) 
             </>
             ) : (
                 <>
-                    <button 
-                    className="button" 
-                    onClick={handleLogout} 
-                    style={{ marginRight: '33px' }}>
-                    Logga ut
-                    </button>
                     <button
                     className={`button ${currentPage === "generateplaylist" ? "active" : ""}`}
                     onClick={() => setPage("generateplaylist")}
@@ -48,8 +42,21 @@ function Navigation({ setPage, isLoggedIn, setIsLoggedIn, currentPage }: Props) 
                     </button>
                     <button
                     className={`button ${currentPage === "stripepaymentlink" ? "active" : ""}`}
-                    onClick={() => setPage("stripepaymentlink")}>
+                    onClick={() => setPage("stripepaymentlink")}
+                    style={{ marginRight: '33px' }}>
                     Köp premium
+                    </button>
+                    <button
+                    className={`button ${currentPage === "spotifylogin" ? "active" : ""}`}
+                    onClick={() => setPage("spotifylogin")}
+                    style={{ marginRight: '33px' }}>
+                    Spotify
+                    </button>
+                    <button 
+                    className="button" 
+                    onClick={handleLogout} 
+                    >
+                    Logga ut
                     </button>
                 </>
             )}

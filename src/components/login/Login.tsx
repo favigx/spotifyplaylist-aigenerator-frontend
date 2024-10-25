@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserDetailsInterface from "../../interfaces/UserDetailsInterface";
+import UserDetailsInterface from "../../interfaces/UserDetailsLoginInterface";
 import './Login.css';
 
 interface Props {

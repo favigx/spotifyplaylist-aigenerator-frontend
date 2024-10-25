@@ -6,6 +6,7 @@ import './GeneratePlaylist.css';
 function GeneratePlaylist() {
     const [newPrompt, setNewPrompt] = useState<PrompInterface>({ prompt: "" });
     const [playlistLink, setPlaylistLink] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const token = localStorage.getItem("token") || "";
     const decodedToken = jwtDecode<{ sub: string }>(token);
@@ -13,7 +14,7 @@ function GeneratePlaylist() {
 
     const sendPrompt = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
+
         fetch(`http://localhost:8080/aichat/${loggedInUser}`, {
             method: "POST",
             headers: {
@@ -26,32 +27,42 @@ function GeneratePlaylist() {
         })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("Kunde inte skapa spellista");
+                return response.text().then((data) => {
+                    console.log("Felmeddelande från servern:", data);
+                    setErrorMessage(data);
+                    setPlaylistLink(null);
+                    throw new Error(data);
+                });
             }
-            return response.json();
+            return response.text();
         })
         .then((data) => {
             console.log("Svar från servern:", data);
-            if (data.length > 0) {
-                const link = data[0].match(/https?:\/\/[^\s]+/);
-                if (link) {
-                    setPlaylistLink(link[0]); 
-                }
+            const playlistCreatedRegex = /https?:\/\/[^\s]+/;
+            const match = data.match(playlistCreatedRegex);
+
+            if (match) {
+                setPlaylistLink(match[0]);
+                setErrorMessage(null);
+            } else {
+                setPlaylistLink(null);
+                setErrorMessage(data);
             }
+
             setNewPrompt({ prompt: "" });
         })
         .catch((error) => {
             console.error("Fel vid sparande av spellista:", error);
+            setErrorMessage("Det verkar som att du inte har loggat in på Spotify");
         });
     };
+
     return (
         <div className="main-text-playlist">
             <form onSubmit={sendPrompt}>
-                <h1>
-                    Använd AI för att skapa din perfekta spellista
-                    </h1>
-                    <br />
-                    <textarea
+                <h1>Använd AI för att skapa din perfekta spellista</h1>
+                <br />
+                <textarea
                     className="inputForm textarea"
                     maxLength={129}
                     required
@@ -65,27 +76,28 @@ function GeneratePlaylist() {
                     onChange={(e) => setNewPrompt({ prompt: e.target.value })}
                 />
 
-                
                 <div className="small-text-playlist">
-                    <p>
-                        Exempel på prompt: Skapa en spellista med 20 låtar som liknar Sultans Of Swing av Dire Straits
-                    </p>
-                
-
+                    <p>Exempel på prompt: Skapa en spellista med 20 låtar som liknar Sultans Of Swing av Dire Straits</p>
                 </div>
                 
-                <button className="button-alwaysshow" type="submit">
+                <button className="button-alwaysshow-playlist" type="submit">
                     Skapa Spellista
                 </button>
             </form>
+            {errorMessage && (
+                <div className="error-message">
+                    <p>{errorMessage}</p> 
+                </div>
+            )}
 
             {playlistLink && (
                 <div>
                     <br />
-                    <button><a href={playlistLink} target="_blank" rel="noopener noreferrer" className="button">
-                        {playlistLink}
-                    </a></button>
-                    
+                    <button className="playlistlinkbutton">
+                        <a href={playlistLink} target="_blank" rel="noopener noreferrer" className="playlistlinkbutton">
+                            {playlistLink} 
+                        </a>
+                    </button>
                 </div>
             )}
         </div>
