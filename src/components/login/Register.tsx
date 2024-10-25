@@ -19,7 +19,7 @@ function Register({ setPage }: Props) {
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/user", {
+    fetch("https://shark-app-j7qxa.ondigitalocean.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
