@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UserDetailsInterface from "../../interfaces/UserDetailsInterface";
+import './Login.css';
 
 interface Props {
   setPage: (page: string) => void;
@@ -47,12 +48,13 @@ function Register({ setPage }: Props) {
   };
 
   return (
-    <div className="register">
+    <div className="background-container">
+      <div className="form-container">
       <form onSubmit={registerUser}>
-        <h3>Registrera</h3>
-        <label>
-          Användarnamn
-          <br />
+       
+       <p className="credentials1">
+         Användarnamn
+       </p>
           <input
             className="inputForm"
             type="text"
@@ -62,12 +64,13 @@ function Register({ setPage }: Props) {
               setNewUser({ ...newUser, username: e.target.value })
             }
           ></input>
-        </label>
+        
         <br />
         <br />
-        <label>
-          Lösenord
-          <br />
+
+        <p className="credentials">
+        Lösenord
+        </p>
           <input
             className="inputForm"
             type="password"
@@ -77,15 +80,16 @@ function Register({ setPage }: Props) {
               setNewUser({ ...newUser, password: e.target.value })
             }
           ></input>
-        </label>
+       
         <br />
         <br />
-        {errorMessage && <p style={{ fontSize: "20px" }}>{errorMessage}</p>}
-        {successMessage && <p style={{ fontSize: "20px" }}>{successMessage}</p>}
-        <button className="button" type="submit">
+        <button className="button-alwaysshow-register" type="submit">
           Registrera ny användare
         </button>
+        {errorMessage && <p style={{ fontSize: "10px" }}>{errorMessage}</p>}
+        {successMessage && <p style={{ fontSize: "10px" }}>{successMessage}</p>}
       </form>
+      </div>
     </div>
   );
 }
