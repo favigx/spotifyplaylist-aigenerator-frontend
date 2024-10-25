@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import './SpotifyLogin.css';
 
 function SpotifyLogin() {
   const [spotifyLoginUrl, setSpotifyLoginUrl] = useState<string | null>(null);
@@ -20,12 +21,21 @@ function SpotifyLogin() {
 
   return (
     <div>
-      <h3>
-        För att använda den här applikationen måste du koppla ditt Spotify-konto med oss, var god tryck på knappen för att logga in på ditt Spotify
-      </h3>
+      <div className="main-text">
+      <h1>
+        För att du ska kunna skapa spellistor till ditt Spotifykonto måste du logga in på Spotify
+      </h1>
+      </div>
       <a href={spotifyLoginUrl} rel="noopener noreferrer">
-        <button>Logga in med Spotify</button>
+        <button className="button-alwaysshow">Logga in med Spotify</button>
       </a>
+      <div className="small-text">
+        <p>
+          Inloggning till Spotify sker via deras egna hemsida. Den här applikationen sparar inga personliga uppgifter som är kopplat till ditt Spotifykonto.
+          Den här applikationen är skapad med hjälp av Spotifys egna utvecklar-api.
+        </p>
+
+      </div>
     </div>
   );
 }

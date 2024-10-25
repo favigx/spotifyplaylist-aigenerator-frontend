@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UserDetailsInterface from "../../interfaces/UserDetailsInterface";
+import './Login.css';
 
 interface Props {
   setPage: (page: string) => void;
@@ -45,12 +46,15 @@ function Login({ setPage, setIsLoggedIn }: Props) {
   };
 
   return (
-    <div>
+    <div className="background-container">
+      <div className="form-container">
       <form onSubmit={loginUser}>
-        <h3>Logga in</h3>
-        <label>
-          Användarnamn
-          <br />
+  
+        
+          <p className="credentials1">
+            Användarnamn
+          </p>
+         
           <input
             className="inputForm"
             type="text"
@@ -60,12 +64,14 @@ function Login({ setPage, setIsLoggedIn }: Props) {
               setNewLogin({ ...newLogin, username: e.target.value })
             }
           ></input>
-        </label>
+        
         <br />
         <br />
-        <label>
-          Lösenord
-          <br />
+        
+        <p className="credentials">
+            Lösenord
+          </p>
+       
           <input
             className="inputForm"
             type="password"
@@ -75,14 +81,16 @@ function Login({ setPage, setIsLoggedIn }: Props) {
               setNewLogin({ ...newLogin, password: e.target.value })
             }
           ></input>
-        </label>
+        
         <br />
         <br />
-        {errorMessage && <p style={{ fontSize: "20px" }}>{errorMessage}</p>}
-        <button className="button" type="submit">
+        
+        <button className="button-alwaysshow-login" type="submit">
           Logga in
         </button>
+        {errorMessage && <p style={{ fontSize: "11px" }}>{errorMessage}</p>}
       </form>
+      </div>
     </div>
   );
 }

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import Login from "./components/login/Login";
-import Register from "./components/register/Register";
+import Register from "./components/login/Register";
 import Navigation from "./components/navigation/Navigation";
 import SpotifyLogin from "./components/spotifylogin/SpotifyLogin";
 import GeneratePlaylist from "./components/generateplaylist/GeneratePlaylist";
-
+import StripePaymentLink from "./components/stripe/StripePaymentLink";
 
 function App() {
   const [page, setPage] = useState<string>("");
@@ -36,12 +36,13 @@ function App() {
 
   return (
     <>
-      <Navigation setPage={setPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> {}
+      <Navigation setPage={setPage} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} currentPage={page} /> {}
       {{
         "register": <Register setPage={setPage} />,
         "login": <Login setPage={setPage} setIsLoggedIn={setIsLoggedIn} />,
         "spotifylogin": <SpotifyLogin />,
-        "generateplaylist": <GeneratePlaylist />
+        "generateplaylist": <GeneratePlaylist />,
+        "stripepaymentlink": <StripePaymentLink />
       }[page]}
     </>
   );

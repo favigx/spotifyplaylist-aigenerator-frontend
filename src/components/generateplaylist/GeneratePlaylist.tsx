@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import PrompInterface from "../../interfaces/PromptInterface";
+import './GeneratePlaylist.css';
 
 function GeneratePlaylist() {
     const [newPrompt, setNewPrompt] = useState<PrompInterface>({ prompt: "" });
@@ -44,24 +45,36 @@ function GeneratePlaylist() {
         });
     };
     return (
-        <div>
-            <h3>Ny spellista</h3>
+        <div className="main-text-playlist">
             <form onSubmit={sendPrompt}>
-                <label>
-                    Skriv vilka artister du vill ha en spellista baserad på, glöm inte att ange hur många låtar du vill att spellistan ska innehålla.
+                <h1>
+                    Använd AI för att skapa din perfekta spellista
+                    </h1>
                     <br />
                     <textarea
-                        className="inputForm textarea"
-                        maxLength={124}
-                        required
-                        style={{ width: "212px", height: "70px" }}
-                        value={newPrompt.prompt}
-                        onChange={(e) => setNewPrompt({ prompt: e.target.value })}
-                    />
-                </label>
-                <br />
-                <br />
-                <button className="button" type="submit">
+                    className="inputForm textarea"
+                    maxLength={129}
+                    required
+                    style={{
+                        width: "296px",
+                        height: "56px",
+                        resize: "none",
+                        overflow: "hidden"
+                    }}
+                    value={newPrompt.prompt}
+                    onChange={(e) => setNewPrompt({ prompt: e.target.value })}
+                />
+
+                
+                <div className="small-text-playlist">
+                    <p>
+                        Exempel på prompt: Skapa en spellista med 20 låtar som liknar Sultans Of Swing av Dire Straits
+                    </p>
+                
+
+                </div>
+                
+                <button className="button-alwaysshow" type="submit">
                     Skapa Spellista
                 </button>
             </form>
