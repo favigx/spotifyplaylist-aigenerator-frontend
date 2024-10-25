@@ -15,7 +15,7 @@ function GeneratePlaylist() {
     const sendPrompt = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch(`https://shark-app-j7qxa.ondigitalocean.app/${loggedInUser}`, {
+        fetch(`https://shark-app-j7qxa.ondigitalocean.app/aichat/${loggedInUser}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -10,7 +10,7 @@ function StripePaymentLink() {
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://shark-app-j7qxa.ondigitalocean.app/${loggedInUser}`, {
+    fetch(`https://shark-app-j7qxa.ondigitalocean.app/stripecheckoutsession/${loggedInUser}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
