@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserDetailsInterface from "../../interfaces/UserDetailsInterface";
+import UserDetailsRegisterInterface from "../../interfaces/UserDetailsRegisterInterface";
 import './Login.css';
 
 interface Props {
@@ -7,7 +7,8 @@ interface Props {
 }
 
 function Register({ setPage }: Props) {
-  const [newUser, setNewUser] = useState<UserDetailsInterface>({
+  const [newUser, setNewUser] = useState<UserDetailsRegisterInterface>({
+    email: "",
     username: "",
     password: "",
   });
@@ -51,7 +52,19 @@ function Register({ setPage }: Props) {
     <div className="background-container">
       <div className="form-container">
       <form onSubmit={registerUser}>
-       
+
+      <p className="credentials2">
+         Email
+       </p>
+          <input
+            className="inputForm"
+            type="text"
+            required
+            value={newUser.email}
+            onChange={(e) =>
+              setNewUser({ ...newUser, email: e.target.value })
+            }
+          ></input>
        <p className="credentials1">
          Användarnamn
        </p>
@@ -64,10 +77,8 @@ function Register({ setPage }: Props) {
               setNewUser({ ...newUser, username: e.target.value })
             }
           ></input>
-        
         <br />
         <br />
-
         <p className="credentials">
         Lösenord
         </p>
@@ -80,7 +91,6 @@ function Register({ setPage }: Props) {
               setNewUser({ ...newUser, password: e.target.value })
             }
           ></input>
-       
         <br />
         <br />
         <button className="button-alwaysshow-register" type="submit">
