@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-    <div className="background-container">
+    <div>
       <div className="header-container">
         <img 
           src={iconImage} 
