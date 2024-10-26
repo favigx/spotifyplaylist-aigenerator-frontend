@@ -4,9 +4,14 @@ import PrompInterface from "../../interfaces/PromptInterface";
 import './GeneratePlaylist.css';
 
 function GeneratePlaylist() {
-    const [newPrompt, setNewPrompt] = useState<PrompInterface>({ prompt: "" });
+    const [newPrompt, setNewPrompt] = useState<PrompInterface>({ 
+        playlistName: "",
+        prompt: ""
+     });
+
     const [playlistLink, setPlaylistLink] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const token = localStorage.getItem("token") || "";
     const decodedToken = jwtDecode<{ sub: string }>(token);
@@ -14,6 +19,9 @@ function GeneratePlaylist() {
 
     const sendPrompt = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
+        setPlaylistLink(null);
+        setErrorMessage(null); 
 
         fetch(`https://shark-app-j7qxa.ondigitalocean.app/aichat/${loggedInUser}`, {
             method: "POST",
@@ -22,6 +30,7 @@ function GeneratePlaylist() {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
+                playlistName: newPrompt.playlistName,
                 prompt: newPrompt.prompt
             }),
         })
@@ -49,40 +58,76 @@ function GeneratePlaylist() {
                 setErrorMessage(data);
             }
 
-            setNewPrompt({ prompt: "" });
+            setNewPrompt({ 
+                playlistName: "",
+                prompt: "" 
+            });
         })
         .catch((error) => {
             console.error("Fel vid sparande av spellista:", error);
             setErrorMessage("Det verkar som att du inte har loggat in på Spotify");
-        });
+        })
+        .finally(() => setLoading(false));
     };
 
     return (
-        <div className="main-text-playlist">
+        <div>
             <form onSubmit={sendPrompt}>
-                <h1>Använd AI för att skapa din perfekta spellista</h1>
+                <h1 className="main-text-playlist">Använd AI-teknik för att skapa din perfekta spellista</h1>
                 <br />
+            <input className="inputForm"
+                type="text"
+                maxLength={50}
+                required
+                style={{
+                    width: "296px",
+                    height: "20px",
+                    resize: "none",
+                    overflow: "hidden",
+                    borderRadius: "3px",
+                }}
+                value={newPrompt.playlistName}
+                onChange={(e) =>
+                setNewPrompt({ ...newPrompt, playlistName: e.target.value })
+                }
+                
+                
+            ></input>
+           <p className="playlist-name" 
+                style={{ 
+                    marginTop: "8px", 
+                    marginBottom: "40px"
+                }}>
+                    Ange ett namn för den önskade spellistan
+                </p>
+            
                 <textarea
                     className="inputForm textarea"
-                    maxLength={129}
+                    maxLength={140}
                     required
                     style={{
                         width: "296px",
                         height: "56px",
                         resize: "none",
-                        overflow: "hidden"
+                        overflow: "hidden",
+                        borderRadius: "3px"
+
                     }}
                     value={newPrompt.prompt}
-                    onChange={(e) => setNewPrompt({ prompt: e.target.value })}
+                    onChange={(e) => setNewPrompt({ ...newPrompt, prompt: e.target.value })}
                 />
 
                 <div className="small-text-playlist">
-                    <p>Exempel på prompt: Skapa en spellista med 20 låtar som liknar Sultans Of Swing av Dire Straits</p>
+                    <p>Exempel på prompt: Skapa en spellista med 20 låtar som liknar Free Bird av Lynyrd Skynyrd</p>
                 </div>
                 
-                <button className="button-alwaysshow-playlist" type="submit">
-                    Skapa Spellista
-                </button>
+                <button className="button-alwaysshow-playlist" type="submit" disabled={loading}>
+                {loading ? (
+                    <div className="spinner"></div>
+                ) : (
+                    "Skapa Spellista"
+                )}
+            </button>
             </form>
             {errorMessage && (
                 <div className="error-message">

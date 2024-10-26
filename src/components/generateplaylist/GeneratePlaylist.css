@@ -1,43 +1,55 @@
 .main-text-playlist {
-    max-width: 350px;
+    max-width: 330px;
     margin: 0 auto;
     text-align: center;
     color:rgb(255, 255, 255);
-    padding-top: 40px;
+    padding-top: 62px;
     padding-bottom: 35px;
 }
 
 .small-text-playlist {
-    max-width: 337px;
+    max-width: 328px;
     margin: 0 auto;
     text-align: center;
-    color:rgb(255, 255, 255);
+    color: rgb(167, 161, 161);
     font-size: 10px;
     padding-bottom: 20px;
+    text-align: left;
+    padding-left: 6px;
+    transition: color 0.3s ease;
 }
 
 .playlistlinkbutton:hover {
-    background-color: #14da56;
+    background-color: #11ec5a;
     color: white;
     font-weight: 700;
-    padding: 18px 7px; 
+    padding: 20px 15px; 
     transition: background-color 0.6s, transform 0.6s ease-in-out;
     text-decoration: none; 
+    transform: scale(1.05);
 }
 
 .playlistlinkbutton {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 318px;
+    height: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 9px;
-    font-weight:700;
-    max-width: 500px;
-    padding: 18px 7px; 
+    font-weight: 700;
+    padding: 0 10px;
     background-color: #14c950;
     color: rgb(0, 0, 0); 
     border: none; 
-    border-radius: 20px; 
+    border-radius: 20px;
     cursor: pointer; 
-    transition: background-color 0.6s, transform 0.6s; 
-    text-decoration: none; 
+    transition: background-color 0.6s, transform 0.6s;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
 .error-message {
@@ -46,28 +58,59 @@
     font-weight: bold;
     font-size: 11px;
     max-width: 337px;
-    padding-left: 6px;
-    
-}
-
-.button-alwaysshow-playlist:hover {
-    background-color: #14da56;
-    color: white;
-    font-weight: 700;
-    padding: 15px 113px; 
-    transition: background-color 0.6s, transform 0.6s ease-in-out
+    padding-left: 471px;
 }
 
 .button-alwaysshow-playlist {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 318px;
+    height: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
-    font-weight:700;
-    max-width: 500px;
-    padding: 15px 113px; 
+    font-weight: 700;
     background-color: #14c950;
     color: rgb(0, 0, 0); 
     border: none; 
     border-radius: 20px; 
     cursor: pointer; 
-    transition: background-color 0.6s, transform 0.6s; 
+    transition: background-color 0.6s, transform 0.6s ease-in-out;
+      margin: 0 auto; 
+}
+
+.button-alwaysshow-playlist:hover {
+    background-color: #11ec5a;
+    color: white;
+    transform: scale(1.05);
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: rgb(3, 80, 10);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.playlist-name {
+    max-width: 330px;
+    margin: 0 auto;
+    text-align: center;
+    color: rgb(167, 161, 161);
+    font-size: 10px;
+    padding-bottom: 20px;
+    text-align: left;
+    padding-left: 11px;
+    transition: color 0.3s ease; /* Övergång för färgändring */
 }

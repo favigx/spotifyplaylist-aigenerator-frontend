@@ -5,7 +5,9 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
+  background-color: #141414;
+
+  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,6 +26,7 @@
   cursor: pointer; 
   width: 120px;
   transition: background-color 0.6s, transform 0.6s ease-in-out;
+  margin-top: 120px;
 }
 
 .button:hover {
@@ -51,6 +54,24 @@
   transform: scale(1.4);
 }
 
+@media (max-width: 768px) {
+  .button {
+    font-size: 9px;
+    width: 77px;
+    padding: 10px 6px;
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    font-size: 9px;
+    width: 77px;
+    padding: 10px 6px;
+    margin-top: 80px;
+  }
+}
+
 .button-alwaysshow:hover {
   background-color: #14da56;
   color: white;
@@ -71,4 +92,47 @@
   border-radius: 20px; 
   cursor: pointer; 
   transition: background-color 0.6s, transform 0.6s; 
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.icon {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logoType {
+  margin: 0;
+  font-size: 30px;
+  color: white;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+@media (max-width: 768px) {
+  .icon {
+    width: 50px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon {
+    width: 40px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
 }

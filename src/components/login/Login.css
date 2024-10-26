@@ -14,7 +14,7 @@
 }
 
 .inputForm {
-    background-color: black;
+    background-color: #141414;
     color: rgb(255, 255, 255);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 13px;
@@ -44,8 +44,20 @@
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+.inputForm:focus + .playlist-name,
+.inputForm:hover + .playlist-name {
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease;
+}
+
+.inputForm:focus + .small-text-playlist p,
+.inputForm:hover + .small-text-playlist p {
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease;
+}
+
 .form-container{
-    margin-top: 150px;
+    margin-top: 210px;
   }
 
 .button-alwaysshow-login:hover {

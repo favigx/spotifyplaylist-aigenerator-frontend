@@ -52,6 +52,12 @@ function Navigation({ setPage, isLoggedIn, setIsLoggedIn, currentPage }: Props) 
                     style={{ marginRight: '33px' }}>
                     Spotify
                     </button>
+                    <button
+                    className={`button ${currentPage === "userprofile" ? "active" : ""}`}
+                    onClick={() => setPage("userprofile")}
+                    style={{ marginRight: '33px' }}>
+                    Ditt konto
+                    </button>
                     <button 
                     className="button" 
                     onClick={handleLogout} 

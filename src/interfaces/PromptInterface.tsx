@@ -1,4 +1,5 @@
 interface PrompInterface{
+    playlistName: string;
     prompt: string;
 }
 
