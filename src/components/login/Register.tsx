@@ -15,9 +15,15 @@ function Register({ setPage }: Props) {
 
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (newUser.password !== confirmPassword) {
+      setErrorMessage("Lösenorden matchar inte. Vänligen försök igen.");
+      return;
+    }
 
     fetch("https://shark-app-j7qxa.ondigitalocean.app/user", {
       method: "POST",
@@ -36,7 +42,7 @@ function Register({ setPage }: Props) {
         console.log("Användare lades till: ", data);
         setErrorMessage("");
         setSuccessMessage(
-          "Du är nu registrerad! Omdirigeras till login om 3 sek..."
+          "Du är nu registrerad! Omdirigeras till logga in"
         );
         setTimeout(() => {
           setPage("login");
@@ -58,7 +64,7 @@ function Register({ setPage }: Props) {
        </p>
           <input
             className="inputForm"
-            type="text"
+            type="email"
             required
             value={newUser.email}
             onChange={(e) =>
@@ -78,10 +84,7 @@ function Register({ setPage }: Props) {
             }
           ></input>
         <br />
-        <br />
-        <p className="credentials">
-        Lösenord
-        </p>
+        <p className="credentials">Lösenord</p>
           <input
             className="inputForm"
             type="password"
@@ -91,13 +94,22 @@ function Register({ setPage }: Props) {
               setNewUser({ ...newUser, password: e.target.value })
             }
           ></input>
+
+          <p className="repeat">Upprepa lösenord</p>
+          <input
+            className="inputForm"
+            type="password"
+            required
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></input>
         <br />
         <br />
         <button className="button-alwaysshow-register" type="submit">
           Registrera ny användare
         </button>
         {errorMessage && <p style={{ fontSize: "10px" }}>{errorMessage}</p>}
-        {successMessage && <p style={{ fontSize: "10px" }}>{successMessage}</p>}
+        {successMessage && <p className="successmessage" style={{ fontSize: "10px" }}>{successMessage}</p>}
       </form>
       </div>
     </div>

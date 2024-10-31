@@ -21,7 +21,8 @@
     color: white;
     font-weight: 700;
     padding: 15px 80px; 
-    transition: background-color 0.6s, transform 0.6s ease-in-out
+    transition: background-color 0.6s, transform 0.6s ease-in-out;
+    transform: scale(1.05);
 }
   
 .button-alwaysshow-stripe {

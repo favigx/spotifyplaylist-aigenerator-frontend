@@ -66,6 +66,7 @@
     font-weight: 700;
     padding: 11px 90px;  
     transition: background-color 0.6s, transform 0.6s ease-in-out;
+    transform: scale(1.05);
 }
   
 .button-alwaysshow-login {
@@ -88,6 +89,7 @@
     font-weight: 700;
     padding: 11px 39px;
     transition: background-color 0.6s, transform 0.6s ease-in-out;
+    transform: scale(1.05);
 }
 
 .button-alwaysshow-register {
@@ -114,4 +116,28 @@
 
 .credentials2 {
     padding-right: 200px;
+}
+
+.repeat {
+    padding-right: 130px;
+}
+
+.successmessage {
+    padding-top: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
