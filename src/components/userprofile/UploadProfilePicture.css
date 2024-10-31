@@ -1,0 +1,47 @@
+.custom-file-button {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight:700;
+    max-width: 500px;
+    padding: 15px 101px; 
+    background-color: #14c950;
+    color: rgb(0, 0, 0); 
+    border: none; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    transition: background-color 0.6s, transform 0.6s; 
+    margin-right: 40px;
+}
+
+.custom-file-button:hover {
+    background-color: #14da56;
+    color: white;
+    font-weight: 700;
+    padding: 15px 101px; 
+    transition: background-color 0.6s, transform 0.6s ease-in-out;
+    transform: scale(1.05);
+}
+
+.button-alwaysshow-profilepicture:hover {
+    background-color: #14da56;
+    color: white;
+    font-weight: 700;
+    padding: 15px 101px; 
+    transition: background-color 0.6s, transform 0.6s ease-in-out;
+    transform: scale(1.05);
+}
+  
+.button-alwaysshow-profilepicture {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight:700;
+    max-width: 500px;
+    padding: 15px 101px; 
+    background-color: #14c950;
+    color: rgb(0, 0, 0); 
+    border: none; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    transition: background-color 0.6s, transform 0.6s; 
+    margin-left: 35px;
+}

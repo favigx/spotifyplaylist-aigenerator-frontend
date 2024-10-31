@@ -47,9 +47,9 @@ function GeneratePlaylist() {
         })
         .then((data) => {
             console.log("Svar från servern:", data);
-            const playlistCreatedRegex = /https?:\/\/[^\s]+/;
+            const playlistCreatedRegex = /spotify:playlist:[^\s]+/;
             const match = data.match(playlistCreatedRegex);
-
+        
             if (match) {
                 setPlaylistLink(match[0]);
                 setErrorMessage(null);
@@ -57,7 +57,7 @@ function GeneratePlaylist() {
                 setPlaylistLink(null);
                 setErrorMessage(data);
             }
-
+        
             setNewPrompt({ 
                 playlistName: "",
                 prompt: "" 

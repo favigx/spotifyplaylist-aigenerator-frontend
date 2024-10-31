@@ -41,6 +41,12 @@ function Navigation({ setPage, isLoggedIn, setIsLoggedIn, currentPage }: Props) 
                     Skapa spellista
                     </button>
                     <button
+                    className={`button ${currentPage === "community" ? "active" : ""}`}
+                    onClick={() => setPage("community")}
+                    style={{ marginRight: '33px' }}>
+                    Community
+                    </button>
+                    <button
                     className={`button ${currentPage === "stripepaymentlink" ? "active" : ""}`}
                     onClick={() => setPage("stripepaymentlink")}
                     style={{ marginRight: '33px' }}>
@@ -56,7 +62,7 @@ function Navigation({ setPage, isLoggedIn, setIsLoggedIn, currentPage }: Props) 
                     className={`button ${currentPage === "userprofile" ? "active" : ""}`}
                     onClick={() => setPage("userprofile")}
                     style={{ marginRight: '33px' }}>
-                    Ditt konto
+                    Profil
                     </button>
                     <button 
                     className="button" 
