@@ -74,7 +74,9 @@ function GeneratePlaylist() {
         <div>
             <form onSubmit={sendPrompt}>
                 <h1 className="main-text-playlist">Använd AI-teknik för att skapa din perfekta spellista</h1>
-                <br />
+       
+                <p className="info">Uppgradera till premium för att skapa fler än 2 spellistor</p>
+                {/* <p className="info">Uppgradera till premium för att skapa fler</p> */}
             <input className="inputForm"
                 type="text"
                 maxLength={50}

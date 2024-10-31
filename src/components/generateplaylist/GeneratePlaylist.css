@@ -4,7 +4,7 @@
     text-align: center;
     color:rgb(255, 255, 255);
     padding-top: 62px;
-    padding-bottom: 35px;
+    padding-bottom: 20px;
 }
 
 .small-text-playlist {
@@ -60,6 +60,19 @@
     font-size: 11px;
     max-width: 337px;
     padding-left: 471px;
+}
+
+.info {
+    max-width: 330px;
+    text-align: center;
+    color:rgb(201, 195, 195);
+    max-width: 328px;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight:700;
+    padding-bottom: 50px;
+  
+
 }
 
 .button-alwaysshow-playlist {
