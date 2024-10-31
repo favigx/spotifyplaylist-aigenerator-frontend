@@ -9,6 +9,7 @@ import SpotifyLogin from "./components/spotifylogin/SpotifyLogin";
 import GeneratePlaylist from "./components/generateplaylist/GeneratePlaylist";
 import StripePaymentLink from "./components/stripe/StripePaymentLink";
 import UserProfile from "./components/userprofile/UserProfile";
+import Community from "./components/community/Community";
 
 import iconImage from '../src/components/login/0C724797-5AF1-4BF8-98FC-CABCD6C60F0F.jpg';
 
@@ -56,7 +57,8 @@ function App() {
         "spotifylogin": <SpotifyLogin />,
         "generateplaylist": <GeneratePlaylist />,
         "stripepaymentlink": <StripePaymentLink />,
-        "userprofile": <UserProfile />
+        "userprofile": <UserProfile />,
+        "community": <Community />
       }[page]}
     </div>
   </>
