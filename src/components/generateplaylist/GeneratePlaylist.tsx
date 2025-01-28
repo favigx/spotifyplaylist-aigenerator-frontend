@@ -23,7 +23,7 @@ function GeneratePlaylist() {
         setPlaylistLink(null);
         setErrorMessage(null); 
 
-        fetch(`https://shark-app-j7qxa.ondigitalocean.app/aichat/${loggedInUser}`, {
+        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/aichat/${loggedInUser}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
