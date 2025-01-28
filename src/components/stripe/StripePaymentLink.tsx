@@ -49,9 +49,9 @@ function StripePaymentLink() {
     }
   }, [loggedInUser, token, isPremium]);
 
-  if (isPremium === null) {
-    return <p>Laddar...</p>;
-  }
+  // if (isPremium === null) {
+  //   return <p>Laddar...</p>;
+  // }
 
   return (
     <div>
