@@ -295,10 +295,9 @@
 }
 
 .my-message .message-bubble {
-    background-color: #00557c;
     align-self: flex-end;
-    max-width: 80%;
-    background-color: transparent;
+    max-width: 70%;
+    
     text-align: left;
     color: black;
     font-weight:600;
@@ -321,7 +320,7 @@
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 10px;
-    max-width: 80%;
+    max-width: 70%;
     word-wrap: break-word;
     overflow-wrap: break-word;
     display: inline-block;

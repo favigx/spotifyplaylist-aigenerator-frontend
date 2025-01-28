@@ -15,7 +15,7 @@ function UserProfile() {
     const loggedInUser = decodedToken.sub;
 
     useEffect(() => {
-        fetch(`https://shark-app-j7qxa.ondigitalocean.app/user/${loggedInUser}`)
+        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${loggedInUser}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("Något gick fel vid hämtning av användardata");

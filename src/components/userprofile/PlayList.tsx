@@ -13,7 +13,7 @@ function Playlist() {
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://shark-app-j7qxa.ondigitalocean.app/playlists/${loggedInUser}`)
+    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/playlists/${loggedInUser}`)
       .then((res) => res.json())
       .then((data) => {
         setPlaylists(data);

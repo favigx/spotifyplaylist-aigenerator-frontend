@@ -25,7 +25,7 @@ function Register({ setPage }: Props) {
       return;
     }
 
-    fetch("https://shark-app-j7qxa.ondigitalocean.app/user", {
+    fetch("https://sea-turtle-app-le797.ondigitalocean.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

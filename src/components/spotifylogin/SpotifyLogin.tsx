@@ -9,7 +9,7 @@ function SpotifyLogin() {
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://shark-app-j7qxa.ondigitalocean.app/spotifylogin/${loggedInUser}`)
+    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/spotifylogin/${loggedInUser}`)
       .then((res) => res.text()) 
       .then((url) => setSpotifyLoginUrl(url))
       .catch((error) => console.error("Error fetching Spotify login URL:", error));

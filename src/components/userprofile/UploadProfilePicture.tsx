@@ -29,7 +29,7 @@ function UploadProfilePicture() {
         }
 
         try {
-            const response = await fetch(`https://shark-app-j7qxa.ondigitalocean.app/profile-image/${loggedInUser}`, {
+            const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/profile-image/${loggedInUser}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

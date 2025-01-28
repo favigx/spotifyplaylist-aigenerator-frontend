@@ -38,7 +38,7 @@ function Country() {
             const fetchPromises = activeUsers.map(async (user) => {
                 if (!newProfiles.has(user)) {
                     try {
-                        const response = await fetch(`https://shark-app-j7qxa.ondigitalocean.app/user/${user}`);
+                        const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${user}`);
                         if (response.ok) {
                             const data: UserProfileInterface = await response.json();
                             newProfiles.set(user, data);
@@ -60,7 +60,7 @@ function Country() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await fetch(`https://shark-app-j7qxa.ondigitalocean.app/chat/${roomName}`);
+                const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/chat/${roomName}`);
                 if (!response.ok) throw new Error("Något gick fel vid hämtning av meddelanden.");
                 const data: Chat[] = await response.json();
                 setMessages(data);
@@ -75,7 +75,7 @@ function Country() {
     }, [roomName]);
 
     useEffect(() => {
-        const socket = new SockJS("https://shark-app-j7qxa.ondigitalocean.app/websocket");
+        const socket = new SockJS("https://sea-turtle-app-le797.ondigitalocean.app/websocket");
         stompClient.current = new Client({
             webSocketFactory: () => socket,
             debug: (str) => console.log(str),
