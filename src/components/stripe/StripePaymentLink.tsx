@@ -14,7 +14,7 @@ function StripePaymentLink() {
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://shark-app-j7qxa.ondigitalocean.app/user/${loggedInUser}`, {
+    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${loggedInUser}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,9 +49,9 @@ function StripePaymentLink() {
     }
   }, [loggedInUser, token, isPremium]);
 
-  // if (isPremium === null) {
-  //   return <p>Laddar...</p>;
-  // }
+  if (isPremium === null) {
+    return <p>Laddar...</p>;
+  }
 
   return (
     <div>
