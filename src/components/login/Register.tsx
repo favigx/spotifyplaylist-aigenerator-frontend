@@ -19,31 +19,33 @@ function Register({ setPage }: Props) {
 
   const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setErrorMessage("");
+    setSuccessMessage("");
+  
     if (newUser.password !== confirmPassword) {
       setErrorMessage("Lösenorden matchar inte. Vänligen försök igen.");
       return;
     }
-
+  
     fetch("https://sea-turtle-app-le797.ondigitalocean.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...newUser }),
+      body: JSON.stringify(newUser),
     })
-      .then((response) => {
+      .then(async (response) => {
+        const responseText = await response.text();
+  
         if (!response.ok) {
-          throw new Error("Användarnamnet är upptaget, prova ett annat namn!");
+          throw new Error(responseText);
         }
-        return response.json();
+        return JSON.parse(responseText);
       })
       .then((data) => {
         console.log("Användare lades till: ", data);
         setErrorMessage("");
-        setSuccessMessage(
-          "Du är nu registrerad! Omdirigeras till logga in"
-        );
+        setSuccessMessage("Du är nu registrerad! Omdirigeras till logga in...");
         setTimeout(() => {
           setPage("login");
         }, 3000);
