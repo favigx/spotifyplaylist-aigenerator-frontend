@@ -9,12 +9,12 @@ function StripePaymentLink() {
   const [stripePaymentLink, setStripePaymentLink] = useState<string | null>(null);
   const [isPremium, setIsPremium] = useState<boolean | null>(null);
 
-  const token = localStorage.getItem("token") || "";
+  const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
   const decodedToken = jwtDecode<{ sub: string }>(token);
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${loggedInUser}`, {
+    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/user/${loggedInUser}/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,8 +31,8 @@ function StripePaymentLink() {
 
   useEffect(() => {
     if (isPremium === false) {
-      fetch(`https://sea-turtle-app-le797.ondigitalocean.app/stripecheckoutsession/${loggedInUser}`, {
-        method: "POST",
+      fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/stripe/${loggedInUser}/checkoutsession`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

@@ -13,7 +13,7 @@ function GeneratePlaylist() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const token = localStorage.getItem("token") || "";
+    const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
     const decodedToken = jwtDecode<{ sub: string }>(token);
     const loggedInUser = decodedToken.sub;
 
@@ -23,11 +23,12 @@ function GeneratePlaylist() {
         setPlaylistLink(null);
         setErrorMessage(null); 
 
-        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/aichat/${loggedInUser}`, {
+        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/ai/${loggedInUser}/generate-playlist`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
+                
             },
             body: JSON.stringify({
                 playlistName: newPrompt.playlistName,
@@ -38,6 +39,7 @@ function GeneratePlaylist() {
             if (!response.ok) {
                 return response.text().then((data) => {
                     console.log("Felmeddelande från servern:", data);
+                    console.log(token);
                     setErrorMessage(data);
                     setPlaylistLink(null);
                     throw new Error(data);

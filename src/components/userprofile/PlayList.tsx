@@ -1,19 +1,22 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-
 import PlaylistInterface from "../../interfaces/PlaylistInterface";
-
 
 function Playlist() {
   const [playlists, setPlaylists] = useState<PlaylistInterface[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const token = localStorage.getItem("token") || "";
-  const decodedToken = jwtDecode<{ sub: string }>(token);
+  const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
+  const decodedToken = jwtDecode<{ sub: string }>(token); 
   const loggedInUser = decodedToken.sub;
 
   useEffect(() => {
-    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/playlists/${loggedInUser}`)
+    fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/spotify/${loggedInUser}/playlist`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setPlaylists(data);
@@ -23,7 +26,7 @@ function Playlist() {
         console.error("Error fetching playlists:", error);
         setLoading(false);
       });
-  }, []);
+  }, [loggedInUser, token]);
 
   if (loading) {
     return <p>Laddar spellistor...</p>;

@@ -16,7 +16,7 @@ interface Chat {
 }
 
 function HipHop() {
-    const token = localStorage.getItem("token") || "";
+    const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
     const decodedToken = jwtDecode<{ sub: string }>(token);
     const loggedInUser = decodedToken.sub;
 
@@ -38,7 +38,7 @@ function HipHop() {
             const fetchPromises = activeUsers.map(async (user) => {
                 if (!newProfiles.has(user)) {
                     try {
-                        const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${user}`);
+                        const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/user/${user}/user`);
                         if (response.ok) {
                             const data: UserProfileInterface = await response.json();
                             newProfiles.set(user, data);
@@ -57,24 +57,36 @@ function HipHop() {
         }
     }, [activeUsers]);
 
-    useEffect(() => {
-        const fetchMessages = async () => {
-            try {
-                const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/chat/${roomName}`);
-                if (!response.ok) throw new Error("Något gick fel vid hämtning av meddelanden.");
-                const data: Chat[] = await response.json();
-                setMessages(data);
-            } catch (error) {
-                console.error("Fel vid hämtning av meddelanden:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchMessages();
-    }, [roomName]);
-
-    useEffect(() => {
+   useEffect(() => {
+           const fetchMessages = async () => {
+               try {
+                   const token = localStorage.getItem("token");
+                   if (!token) {
+                       throw new Error("Token saknas");
+                   }
+       
+                   const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/chat/${roomName}`, {
+                       method: 'GET',
+                       headers: {
+                           'Authorization': `Bearer ${token}`,
+                       },
+                   });
+       
+                   if (!response.ok) throw new Error("Något gick fel vid hämtning av meddelanden.");
+                   
+                   const data: Chat[] = await response.json();
+                   setMessages(data);
+               } catch (error) {
+                   console.error("Fel vid hämtning av meddelanden:", error);
+               } finally {
+                   setLoading(false);
+               }
+           };
+       
+           fetchMessages();
+       }, [roomName]);
+    
+       useEffect(() => {
         const socket = new SockJS("https://sea-turtle-app-le797.ondigitalocean.app/websocket");
         stompClient.current = new Client({
             webSocketFactory: () => socket,

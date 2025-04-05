@@ -18,7 +18,7 @@ function Login({ setPage, setIsLoggedIn }: Props) {
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch("https://sea-turtle-app-le797.ondigitalocean.app/loginuser", {
+    fetch("https://sea-turtle-app-le797.ondigitalocean.app/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

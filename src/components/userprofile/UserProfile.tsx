@@ -10,12 +10,17 @@ function UserProfile() {
     const [userProfile, setUserProfile] = useState<UserProfileInterface | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [currentSection, setCurrentSection] = useState<string>("playlists"); 
-    const token = localStorage.getItem("token") || "";
+    const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
     const decodedToken = jwtDecode<{ sub: string }>(token);
     const loggedInUser = decodedToken.sub;
 
     useEffect(() => {
-        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/user/${loggedInUser}`)
+        fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/user/${loggedInUser}/user`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("Något gick fel vid hämtning av användardata");
@@ -27,7 +32,7 @@ function UserProfile() {
             })
             .catch((error) => console.error("Fel:", error))
             .finally(() => setLoading(false));
-    }, [loggedInUser, userProfile]);
+    }, [loggedInUser, token]);
 
     if (loading) {
         return <p>Laddar...</p>;
@@ -67,7 +72,7 @@ function UserProfile() {
                     {currentSection === "information" && (
                         <div className="center-container">
                             <div className="user-info">
-                            {userProfile.profileImage && (
+                                {userProfile.profileImage && (
                                     <div>
                                         <img 
                                             src={`data:image/png;base64,${userProfile.profileImage}`} 
@@ -84,8 +89,6 @@ function UserProfile() {
                                 <p className="pinfo">{userProfile.playlistsCreated}</p><br/>
                                 <p><strong>Premium<br/></strong></p>
                                 <p className="pinfo">{userProfile.premium ? "Ja" : "Nej"}</p>
-
-                               
                             </div>
                         </div>
                     )}

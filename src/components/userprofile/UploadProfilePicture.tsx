@@ -19,7 +19,7 @@ function UploadProfilePicture() {
     };
 
     const handleUpload = async () => {
-        const token = localStorage.getItem("token") || "";
+        const token = (localStorage.getItem("token") || "").replace(/^token:\s*/, "");
         const decodedToken = jwtDecode<{ sub: string }>(token);
         const loggedInUser = decodedToken.sub;
 
@@ -29,7 +29,7 @@ function UploadProfilePicture() {
         }
 
         try {
-            const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/profile-image/${loggedInUser}`, {
+            const response = await fetch(`https://sea-turtle-app-le797.ondigitalocean.app/api/user/${loggedInUser}/profile-image`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -47,6 +47,7 @@ function UploadProfilePicture() {
         } catch (error) {
             console.error("Fel vid uppladdning: ", error);
             setStatusMessage("Fel vid uppladdning av profilbild.");
+            console.log(token);
         }
     };
 
